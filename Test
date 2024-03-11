@@ -1,0 +1,19 @@
+import unittest
+from mybignumber import Solution, ListNode
+
+class TestMyBigNumber(unittest.TestCase):
+    def test_addTwoNumbers(self):
+        solution = Solution()
+        # Tạo các số đầu vào
+        a, a.next, a.next.next, a.next.next.next = ListNode(2), ListNode(3), ListNode(4), ListNode(1)
+        b, b.next, b.next.next = ListNode(7), ListNode(9), ListNode(8)
+        # Kết quả mong đợi
+        expected_result = "9 -> 2 -> 3 -> 2"
+        # Thực hiện phép cộng
+        result = solution.addTwoNumbers(a, b)
+        # Kiểm tra kết quả
+        actual_result = " -> ".join(str(val) for val in [result.val, result.next.val, result.next.next.val, result.next.next.next.val])
+        self.assertEqual(actual_result, expected_result)
+
+if __name__ == '__main__':
+    unittest.main()
