@@ -1,0 +1,58 @@
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+class Solution(object):
+    def addTwoNumbers(self, stn1, stn2):
+        """
+        :type stn1: str
+        :type stn2: str
+        :rtype: ListNode
+        """
+        # Hàm để chuyển chuỗi thành danh sách liên kết
+        def string_to_linked_list(string):
+            dummy = ListNode(0)
+            current = dummy
+            for char in string[::-1]:
+                current.next = ListNode(int(char))
+                current = current.next
+            return dummy.next
+
+        # Hàm để chuyển danh sách liên kết thành chuỗi
+        def linked_list_to_string(node):
+            result = ''
+            while node:
+                result += str(node.val)
+                node = node.next
+            return result
+
+        l1 = string_to_linked_list(stn1)
+        l2 = string_to_linked_list(stn2)
+
+        dummy = ListNode(0)
+        current, carry = dummy, 0
+
+        while l1 or l2:
+            val = carry
+            if l1:
+                val += l1.val
+                l1 = l1.next
+            if l2:
+                val += l2.val
+                l2 = l2.next
+            carry, val = divmod(val, 10)
+            current.next = ListNode(val)
+            current = current.next
+
+        if carry == 1:
+            current.next = ListNode(1)
+
+        return dummy.next
+
+if __name__ == '__main__':
+    result = Solution().addTwoNumbers("123456", "897654")
+    current = result
+    while current:
+        print(current.val, end=" -> ")
+        current = current.next
